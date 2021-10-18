@@ -64,30 +64,29 @@ post=session.run("MATCH(p:Post)-[:ACCOUNT_POST]->(a:Account) "
                  "return a.UserName AS User,a.Country AS Country,a.Location AS Location,a.StatusesCount AS statuses,a.FollowerCount AS follower,a.FollowingCount AS following  , a.FavouritesCount AS favourite, a.CreatedDate AS created_date,a.ListedCount AS ListedCount, a.Verified AS verified,p.AccountId AS AccountId , p.Id AS id,p.ReplyCount AS reply,p.RetweetCount AS Retweeted,p.IsRetweet AS is_retweeted,p.CreatedDate AS created,p.FavoriteCount AS favorite,a.ProfileImageUrl AS Image", yesterday = yesterday,dt_string = dt_string)
 
 posting=[]
-for record_3 in post:
-    posting.append([record_3["User"],
-                    record_3["Country"],
-                    record_3["Location"],
-                    record_3["statuses"],
-                    record_3["follower"],
-                    record_3["following"],
-                    record_3["favourite"],
-                    record_3["created_date"],
-                    record_3["ListedCount"],
-                    record_3["verified"],
-                    record_3["AccountId"],
-                    record_3["id"],
-                    record_3["reply"],
-                    record_3["Retweeted"],
-                    record_3["is_retweeted"],
-                    record_3["created"],
-                    record_3["favorite"],
-                    record_3["Image"]
+for record in post:
+    posting.append([record["User"],
+                    record["Country"],
+                    record["Location"],
+                    record["statuses"],
+                    record["follower"],
+                    record["following"],
+                    record["favourite"],
+                    record["created_date"],
+                    record["ListedCount"],
+                    record["verified"],
+                    record["AccountId"],
+                    record["id"],
+                    record["reply"],
+                    record["Retweeted"],
+                    record["is_retweeted"],
+                    record["created"],
+                    record["favorite"],
+                    record["Image"]
                     ])
 
 if posting:
     post=pd.DataFrame(posting)
-    #post=spark.createDataFrame(post)
 
 post['date_filter'] = '1'
 
@@ -125,31 +124,31 @@ retweet=session.run("MATCH(p:Post)-[:ACCOUNT_POST]->(a:Account)"
                     " and p.CreatedDate >= $yesterday AND p.CreatedDate < $dt_string"
                     "  return a.UserName AS User,a.Country AS Country,a.Location AS Location,a.StatusesCount AS statuses,a.FollowerCount AS follower,a.FollowingCount AS following  , a.FavouritesCount AS favourite, a.CreatedDate AS created_date,a.ListedCount AS ListedCount, a.Verified AS verified, p.AccountId AS AccountId, p.Id AS id,p.ReplyCount AS reply,p.RetweetCount AS Retweeted,p.IsRetweet AS is_retweeted,p.CreatedDate AS created,p.FavoriteCount AS favorite,a.ProfileImageUrl AS Image",yesterday = yesterday, dt_string= dt_string)
 
-retweet_2=[]
-for record_7 in retweet:
-    retweet_2.append([record_7["User"],
-                      record_7["Country"],
-                      record_7["Location"],
-                      record_7["statuses"],
-                      record_7["follower"],
-                      record_7["following"],
-                      record_7["favourite"],
-                      record_7["created_date"],
-                      record_7["ListedCount"],
-                      record_7["verified"],
-                      record_7["AccountId"],
-                      record_7["id"],
-                      record_7["reply"],
-                      record_7["Retweeted"],
-                      record_7["is_retweeted"],
-                      record_7["created"],
-                      record_7["favorite"],
-                      record_7["Image"]
+retweet_serie=[]
+for record_retweet in retweet:
+    retweet_serie.append([record_retweet["User"],
+                      record_retweet["Country"],
+                      record_retweet["Location"],
+                      record_retweet["statuses"],
+                      record_retweet["follower"],
+                      record_retweet["following"],
+                      record_retweet["favourite"],
+                      record_retweet["created_date"],
+                      record_retweet["ListedCount"],
+                      record_retweet["verified"],
+                      record_retweet["AccountId"],
+                      record_retweet["id"],
+                      record_retweet["reply"],
+                      record_retweet["Retweeted"],
+                      record_retweet["is_retweeted"],
+                      record_retweet["created"],
+                      record_retweet["favorite"],
+                      record_retweet["Image"]
                     ])
 
 
-if retweet_2:
-    retweet=pd.DataFrame(retweet_2)
+if retweet_serie:
+    retweet=pd.DataFrame(retweet_series)
 
 
 retweet['date_filter'] = '1'
