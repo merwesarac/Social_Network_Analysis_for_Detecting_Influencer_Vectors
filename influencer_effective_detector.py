@@ -18,19 +18,10 @@ spark = SparkSession \
     .getOrCreate()
 
 conf = spark.sparkContext._conf.setAll([('spark.executor.memory', '84g'),
-                                      ('spark.executor.cores', '150'),
-                                      ('spark.cores.max', '150'),
+                                      ('spark.executor.cores', '5'),
+                                      ('spark.cores.max', '15'),
                                       ('spark.driver.memory','100g'),
                                       ('spark.parallelize','5')])
-
-#df = spark.read.format("org.neo4j.spark.DataSource") \
-#    .option("url", "neo4j://35.204.166.131:7687") \
-#    .option("authentication.basic.username", "neo4j") \
-#    .option("authentication.basic.password", "fErN1dFxhy7iUduD") \
-#    .option("query","MATCH (n:Account) RETURN n LIMIT 25") \
-#    .load()
-
-#df.show()
 
 
 
@@ -417,7 +408,7 @@ active = active.withColumn("status",
 
 active = active.withColumn("date_filter" , lit(1))
 
-active.toPandas().to_excel('result_day.xlsx')
+active.toPandas().to_excel('result.xlsx')
 
 active.createOrReplaceTempView("active")
 
@@ -428,7 +419,7 @@ active_result = spark.sql("SELECT first(User) as title,first(Image) as Image,fir
 active_result = active_result.dropDuplicates()
 
 
-active_result.toPandas().to_excel('active_day.xlsx')
+active_result.toPandas().to_excel('active.xlsx')
 
 active_result = active_result.select("*").toPandas()
 
