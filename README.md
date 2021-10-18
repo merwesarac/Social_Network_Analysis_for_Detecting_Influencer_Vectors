@@ -4,9 +4,9 @@
 
 For this aim,
 
-Users' following,retweet,likes count informations were integrated to the degree centrality formula to understand their interactivity
-       follower,retweeted,favourite count informations were integrated to the formula to understand their effectivity
+Users' following,retweet,likes count informations were integrated to the degree centrality formula to understand their **interactivity**
+       follower,retweeted,favourite count informations were integrated to the formula to understand their **effectivity**
        
-At the end of the working, influencer and interactive scores sent to the service
+At the end of the working, influencer and interactive scores sent to the **service**
 
 **PySpark** was used in coding,required libraries installed and Hadoop environment set.
